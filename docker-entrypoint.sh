@@ -16,7 +16,7 @@ start_rsyslogd() {
 }
 
 start_lb() {
-  exec haproxy -W -db "$@"
+  exec /docker-entrypoint-original.sh "$@"
 }
 
 main "$@"

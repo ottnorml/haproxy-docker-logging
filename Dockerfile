@@ -8,11 +8,8 @@ RUN set -exo pipefail \
     && apk del syslog-ng \
     && mkdir -p /etc/rsyslog.d \
     && touch /var/log/haproxy.log \
-    && ln -sf /dev/stdout /var/log/haproxy.log
+    && ln -sf /dev/stdout /var/log/haproxy.log \
+    && mv /docker-entrypoint.sh /docker-entrypoint-original.sh
 
 COPY docker-entrypoint.sh /
 COPY rsyslog.conf /etc/rsyslog.d/
-
-ENTRYPOINT ["/docker-entrypoint.sh"]
-
-CMD ["-f", "/usr/local/etc/haproxy/haproxy.cfg"]
